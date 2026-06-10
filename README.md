@@ -49,3 +49,22 @@ Dangerous! Reset anyway? [y/N]:
 ```
 
 O dispositivo será reinicializado e o WinBox perderá a conexão. Aguarde até o WinBox conseguir conectar novamente.
+
+# Configurações do Hotspot
+
+Por padrão, o WinBox já abrirá a janela do Terminal que estava aberta anteriormente quando você digitou o comando para resetar as configurações, mas caso não esteja, clique novamente na opção “New Terminal” do menu esquerdo.
+
+No Terminal você deve executar as linhas de comandos abaixo para configurar o Hotspot.
+
+```routeros
+/ip/dhcp-client/add interface=ether1
+/ip/address/add interface=wlan1 address=172.50.1.1/24
+/ip/pool/add name=captive-pool ranges=172.50.1.2-172.50.1.254
+/ip/dhcp-server/network/add address=172.50.1.0/24 gateway=172.50.1.1 dns-server=172.50.1.1
+/ip/dhcp-server/add name=captive-dns interface=wlan1 address-pool=captive-pool
+/ip/dns/set allow-remote-requests=yes
+/ip/hotspot/user/profile/add name=captive-user-profile add-mac-cookie=no rate-limit=2M/10M
+/ip/hotspot/profile/add name=captive-profile hotspot-address=172.50.1.1 dns-name=wifi.local login-by=http-chap,trial trial-uptime-limit=1d trial-uptime-reset=0 trial-user-profile=captive-user-profile install-hotspot-queue=yes rate-limit=10M/50M
+/ip/hotspot/add name=captive-portal interface=wlan1 profile=captive-profile disabled=no
+/ip/firewall/filter/add chain=input in-interface=ether1 connection-state=new action=drop
+```
