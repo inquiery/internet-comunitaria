@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html lang='pt-br'>
+	<head>
+		<meta charset='utf-8'>
+		<link rel='stylesheet' href='css/captive.css'>
+		<title>Internet Compartilhada</title>
+	</head>
+	
+	<body class='text'>
+		<div id='background'></div>
+		<div class='container'>		
+			<div class='top'>
+				<div class='logo-box'>
+					<img class='logo-img' src='img/logo.png' alt='Internet Comunitária'>
+				</div>
+				<div class='text-center'>
+					Bem vindo a Internet da <span class='text-bold nowrap'>Praça do Bairro<span>
+				</div>
+			</div>
+			
+			<div class='bottom'>
+				$(if trial == 'yes')
+				<div class='center'>
+					<button class='crystal-button green-crystal-button' onclick='connectClick();'>Conectar</button>
+				</div>
+				$(else)
+				<div class='center'>
+					Internet desativada.
+				</div>
+				$(endif)
+			</div>
+		</div>
+	</body>
+	
+	
+	<script src='scripts/main.js'></script>
+	<script>
+		let connectURL = null;
+		let defaultURL = 'https://www.google.com.br/';
+		
+		function connectClick() {
+			if (connectURL) {
+				window.location.href = `$(link-login-only)?dst=${encodeURIComponent(connectURL)}&username=T-$(mac-esc)`;
+			} else {
+				alert('O portal de conexão ainda não foi carregado, aguarde alguns instantes e tente novamente.');
+			}
+		}
+		
+		tryLoadBackground();
+		
+		fetch('link.txt')
+			.then(response => {
+				if (!response.ok) {
+					return defaultURL;
+				}
+				return response.text();
+			})
+			.then(text => {
+				connectURL = text.trim();
+			})
+			.catch(error => {
+				connectURL = defaultURL;
+			});
+	</script>
+</html>

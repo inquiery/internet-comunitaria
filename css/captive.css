@@ -1,0 +1,143 @@
+body {
+	background-color: white;
+	margin: 0;
+	height: 100%;
+}
+
+#background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: -1;
+	opacity: 1;
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+.container {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.top {
+	padding: 10px;
+}
+
+.bottom {
+	padding: 10px;
+	border: 10px;
+	margin-top: auto;
+}
+
+.center {
+	display: flex;
+	justify-content: center;
+}
+
+.logo-box {
+	border: 3px solid rgba(0, 0, 0, 0.5);
+	border-radius: 2vw;
+	background: rgba(255, 255, 255, 0.5);
+	background-image: url('img/logo.png');
+	background-size: contain;
+	backdrop-filter: blur(5px);
+	padding: 2vw;
+}
+
+.logo-img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+.crystal-button {
+	padding: 1vh 4vw;
+	color: white;
+	font-size: clamp(1rem, 3vh, 5vh);
+	font-weight: bold;
+	border-radius: 2vw;
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	cursor: pointer;
+	text-shadow:
+		0 0 1vw rgba(0, 0, 0, 0.5),
+		-1vw 0 1vw rgba(0, 0, 0, 0.5),
+		1vw 0 1vw rgba(0, 0, 0, 0.5),
+		0 -1vw 1vw rgba(0, 0, 0, 0.5),
+		0 1vw 1vw rgba(0, 0, 0, 0.5),
+		-1vw -1vw 1vw rgba(0, 0, 0, 0.5),
+		1vw -1vw 1vw rgba(0, 0, 0, 0.5),
+		-1vw 1vw 1vw rgba(0, 0, 0, 0.5),
+		1vw 1vw 1vw rgba(0, 0, 0, 0.5);
+}
+
+.green-crystal-button {
+	background: rgba(0, 255, 0, 0.15);
+	border: 3px solid rgba(0, 255, 0, 0.3);
+	transition: all 0.3s ease;
+}
+
+.green-crystal-button:hover {
+	background: rgba(0, 255, 0, 0.3);
+	border: 3px solid rgba(64, 255, 64, 0.6);
+	transition: all 0.3s ease;
+}
+
+.gray-crystal-button {
+	background: rgba(127, 127, 127, 0.15);
+	border: 3px solid rgba(127, 127, 127, 0.3);
+	transition: all 0.3s ease;
+}
+
+.gray-crystal-button:hover {
+	background: rgba(127, 127, 127, 0.3);
+	border: 3px solid rgba(127, 127, 127, 0.6);
+	transition: all 0.3s ease;
+}
+
+.text {
+	font-family: Tahoma, Arial, DejaVu Sans;
+	font-size: clamp(1rem, 3vh, 5vh);
+	color: white;
+	text-shadow:
+		0 0 1vw rgba(0, 0, 0, 0.5),
+		-1vw 0 1vw rgba(0, 0, 0, 0.5),
+		1vw 0 1vw rgba(0, 0, 0, 0.5),
+		0 -1vw 1vw rgba(0, 0, 0, 0.5),
+		0 1vw 1vw rgba(0, 0, 0, 0.5),
+		-1vw -1vw 1vw rgba(0, 0, 0, 0.5),
+		1vw -1vw 1vw rgba(0, 0, 0, 0.5),
+		-1vw 1vw 1vw rgba(0, 0, 0, 0.5),
+		1vw 1vw 1vw rgba(0, 0, 0, 0.5);
+}
+
+.text-bold {
+	font-weight: bold;
+}
+
+.text-green {
+	color: lime;
+	text-shadow:
+		0 0 1vw rgba(0, 0, 0, 0.5),
+		-1vw 0 1vw rgba(0, 0, 0, 0.5),
+		1vw 0 1vw rgba(0, 0, 0, 0.5),
+		0 -1vw 1vw rgba(0, 0, 0, 0.5),
+		0 1vw 1vw rgba(0, 0, 0, 0.5),
+		-1vw -1vw 1vw rgba(0, 0, 0, 0.5),
+		1vw -1vw 1vw rgba(0, 0, 0, 0.5),
+		-1vw 1vw 1vw rgba(0, 0, 0, 0.5),
+		1vw 1vw 1vw rgba(0, 0, 0, 0.5);
+}
+
+.text-center {
+	text-align: center;
+}
+
+.nowrap {
+	white-space: nowrap;
+}
