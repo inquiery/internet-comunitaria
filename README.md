@@ -6,7 +6,7 @@ A solução apresentada aqui é uma forma simplificada do processo de ingresso, 
 
 A página web a qual o usuário é direcionado ao se conectar no Wifi é chamada de “captive-portal”. Os arquivos do captive-portal se encontram no github no endereço https://github.com/inquiery/internet-comunitaria.
 
-#Dispositivos recomendados
+# Dispositivos recomendados
 
 Você pode usar essa solução em qualquer dispositivo Mikrotik. Abaixo segue modelos de dispositivos já pensados para uso externo (na rua), facilitando o uso.
 
