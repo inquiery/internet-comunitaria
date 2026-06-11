@@ -11,7 +11,7 @@
 		<div class='container'>		
 			<div class='top'>
 				<div class='logo-box'>
-					<img class='logo-img' src='img/logo.png' alt='Internet Comunitária'>
+					<img class='logo-img' id='logo' src='' alt='Internet Comunitária'>
 				</div>
 				<div class='text-green text-center'>
 					Você está conectado.<br>
@@ -26,7 +26,7 @@
 	</body>
 	
 	
-	<script src='scripts/main.js'></script>
+	<script src='captive.js'></script>
 	<script>
 		let connectURL = null;
 		let defaultURL = 'https://www.google.com.br/';
@@ -39,7 +39,7 @@
 			}
 		}
 		
-		tryLoadBackground();
+		loadImages();
 		
 		fetch('link.txt')
 			.then(response => {
