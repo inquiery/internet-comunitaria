@@ -4,6 +4,9 @@
 		<meta charset='utf-8'>
 		<link rel='stylesheet' href='css/captive.css'>
 		<title>Internet Compartilhada</title>
+		<script>
+			let connectURL = 'https://www.google.com.br';
+		</script>
 	</head>
 	
 	<body class='text'>
@@ -14,13 +17,13 @@
 					<img class='logo-img' id='logo' src='' alt='Internet Comunitária'>
 				</div>
 				<div class='text-green text-center'>
-					Você está conectado.<br>
-					Se não for redirecionado ao portal automaticamente, clique em "Abrir portal" abaixo.
+					<div class='text-bold'>Você está conectado.</div>
+					<div class='text-small'>Se não for redirecionado automaticamente, clique em "Continuar".</div>
 				</div>
 			</div>
 			
 			<div class='center bottom'>
-				<button class='crystal-button green-crystal-button' onclick='connectClick();'>Abrir portal</button>
+				<button class='crystal-button gray-crystal-button' onclick='connectClick();'>Continuar</button>
 			</div>
 		</div>
 	</body>
@@ -28,33 +31,11 @@
 	
 	<script src='captive.js'></script>
 	<script>
-		let connectURL = null;
-		let defaultURL = 'https://www.google.com.br/';
-		
 		function connectClick() {
-			if (connectURL) {
-				window.location.href = connectURL;
-			} else {
-				alert('O portal de conexão ainda não foi carregado, aguarde alguns instantes e tente novamente.');
-			}
+			window.location.href = connectURL;
 		}
 		
 		loadImages();
-		
-		fetch('link.txt')
-			.then(response => {
-				if (!response.ok) {
-					return defaultURL;
-				}
-				return response.text();
-			})
-			.then(text => {
-				connectURL = text.trim();
-			})
-			.catch(error => {
-				connectURL = defaultURL;
-			});
-		
 		setTimeout(connectClick, 3000);
 	</script>
 </html>
