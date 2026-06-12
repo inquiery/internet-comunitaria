@@ -1,7 +1,9 @@
 body {
 	background-color: white;
 	margin: 0;
-	height: 100%;
+	padding: 0;
+	min-height: 100vh;
+	/*overflow-x: hidden;*/
 }
 
 #background {
@@ -32,6 +34,7 @@ body {
 	padding: 10px;
 	border: 10px;
 	margin-top: auto;
+	margin-bottom: 20px;
 }
 
 .center {
@@ -41,7 +44,7 @@ body {
 
 .logo-box {
 	border: 3px solid rgba(0, 0, 0, 0.5);
-	border-radius: 2vw;
+	border-radius: 12px;
 	background: rgba(255, 255, 255, 0.5);
 	background-size: contain;
 	display: flex;
@@ -54,26 +57,18 @@ body {
 	display: block;
 	max-width: 100%;
 	height: auto;
+	object-fit: contain;
 }
 
 .crystal-button {
 	color: white;
 	font-size: clamp(1rem, 3vh, 5vh);
 	font-weight: bold;
-	border-radius: 2vw;
+	border-radius: 20px;
 	backdrop-filter: blur(12px);
 	-webkit-backdrop-filter: blur(12px);
 	cursor: pointer;
-	text-shadow:
-		0 0 0.5vh rgba(0, 0, 0, 0.5),
-		-0.5vh 0 1vh rgba(0, 0, 0, 0.5),
-		0.5vh 0 1vh rgba(0, 0, 0, 0.5),
-		0 -0.5vh 1vh rgba(0, 0, 0, 0.5),
-		0 1vh 0.5vh rgba(0, 0, 0, 0.5),
-		-0.5vh -0.5vh 1vh rgba(0, 0, 0, 0.5),
-		0.5vh -0.5vh 1vh rgba(0, 0, 0, 0.5),
-		-0.5vh 0.5vh 1vh rgba(0, 0, 0, 0.5),
-		0.5vh 0.5vh 1vh rgba(0, 0, 0, 0.5);
+	text-shadow: 0 2px 4px rgba(0,0,0,1), 0 0 10px rgba(0,0,0,1);
 }
 
 .green-crystal-button {
@@ -104,16 +99,7 @@ body {
 	font-family: Tahoma, Arial, DejaVu Sans;
 	font-size: 4vh;
 	color: white;
-	text-shadow:
-		0 0 0.5vh rgba(0, 0, 0, 0.5),
-		-0.5vh 0 1vh rgba(0, 0, 0, 0.5),
-		0.5vh 0 1vh rgba(0, 0, 0, 0.5),
-		0 -0.5vh 1vh rgba(0, 0, 0, 0.5),
-		0 1vh 0.5vh rgba(0, 0, 0, 0.5),
-		-0.5vh -0.5vh 1vh rgba(0, 0, 0, 0.5),
-		0.5vh -0.5vh 1vh rgba(0, 0, 0, 0.5),
-		-0.5vh 0.5vh 1vh rgba(0, 0, 0, 0.5),
-		0.5vh 0.5vh 1vh rgba(0, 0, 0, 0.5);
+	text-shadow: 0 2px 4px rgba(0,0,0,1), 0 0 10px rgba(0,0,0,1);
 }
 
 .text-bold {
