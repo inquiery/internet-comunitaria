@@ -1,4 +1,4 @@
-#Sobre o projeto
+# Sobre o projeto
 
 Um hotspot wifi é um roteador configurado para que os usuários ao se conectarem sejam solicitados a fazer algum processo de ingresso na rede antes de terem o acesso à internet liberado. Esse ingresso geralmente se dá através da apresentação de uma página de cadastro, ou de check-in em uma página específica.
 
@@ -15,7 +15,7 @@ GrooveA 52 (https://mikrotik.com/product/RBGrooveA-52HPnr2)
 OmniTIK 5 ac (https://mikrotik.com/product/rbomnitikg_5hacd)  
 OmniTIK 5 PoE ac (https://mikrotik.com/product/rbomnitikpg_5hacd)  
 
-#Primeiro acesso ao RouterOS Mikrotik
+# Primeiro acesso ao RouterOS Mikrotik
 
 Ao ligar o dispositivo Mikrotik, para fazer o primeiro acesso, você pode utilizar a ferramenta WinBox do fabricante, que pode ser baixada em https://mikrotik.com/download/winbox. Acessando o link, faça o download da ferramenta que corresponda ao seu sistema operacional.
 
@@ -41,11 +41,15 @@ O dispositivo pode vir com algumas configurações de fábrica, as quais podem s
 
 Na janela de terminal que será aberta, caso aparece uma mensagem informando “Do you want to see the software license? [Y/n]:” apenas pressione “N” no teclado para continuar e abrir o terminal para digitação de comandos. Após isso, digite o comando abaixo (e pressionar ENTER ao terminar de digitar):
 
-```/system/reset-configuration no-defaults=yes```
+```
+/system/reset-configuration no-defaults=yes
+```
 
 Após pressionar ENTER será apresentada uma mensagem solicitando sua confirmação, pressione “Y” no teclado para confirmar.
 
-```Dangerous! Reset anyway? [y/N]:```
+```
+Dangerous! Reset anyway? [y/N]:
+```
 
 O dispositivo será reinicializado e o WinBox perderá a conexão. Aguarde até que o WinBox se conecte novamente.
 
@@ -57,30 +61,39 @@ Antes de fazer as configurações próprias do Hotspot, precisamos criar a inter
 
 Primeiramente digite o comando abaixo para criar a interface bridge que unificará as interfaces wifi:
 
-```/interface/bridge/add protocol-mode=none name=wifi```
+```
+/interface/bridge/add protocol-mode=none name=wifi
+```
 
 Agora vamos precisar associar todas as interfaces wifi a essa bridge, para isso vamos listar todas elas com o comando abaixo:
 
-```/interface/wireless/print proplist=name```
+```
+/interface/wireless/print proplist=name
+```
 
 Após digitar esse comando, você verá no terminal uma lista com as interfaces wifi, conforme exemplo abaixo:
 
-```[admin@MikroTik] > /interface/wireless/print proplist=name
+```
+[admin@MikroTik] > /interface/wireless/print proplist=name
 Flags: X - DISABLED; R - RUNNING
  0 X  name="wlan1"
 
- 1 X  name="wlan2"```
+ 1 X  name="wlan2"
+```
 
 No exemplo acima, o dispositivo possui duas interfaces wifi, a interface “wlan1” e a “wlan2”, portanto, será necessário associar as duas com a bridge, utilizando os comandos abaixo:
 
-```/interface/bridge/port/add bridge=wifi interface=wlan1
-/interface/bridge/port/add bridge=wifi interface=wlan2```
+```
+/interface/bridge/port/add bridge=wifi interface=wlan1
+/interface/bridge/port/add bridge=wifi interface=wlan2
+```
 
 Caso você tenha apenas a interface “wlan1” quando executou o comando de listar as interfaces wifi, digite apenas o primeiro comando acima.
 
 Por fim, para fazer as configurações do Hotspot, execute as linhas de comandos abaixo.
 
-```/ip/dhcp-client/add interface=ether1
+```routeros
+/ip/dhcp-client/add interface=ether1
 /ip/address/add interface=wifi address=172.50.1.1/24
 /ip/pool/add name=captive-pool ranges=172.50.1.2-172.50.1.254
 /ip/dhcp-server/network/add address=172.50.1.0/24 gateway=172.50.1.1 dns-server=172.50.1.1
@@ -94,7 +107,8 @@ Por fim, para fazer as configurações do Hotspot, execute as linhas de comandos
 /ip/firewall/address-list/add list=localnet address=192.168.0.0/16
 /ip/firewall/address-list/add list=localnet address=169.254.0.0/16
 /ip/firewall/filter/add chain=input in-interface=ether1 src-address-list=!localnet connection-state=new action=drop
-/ip/firewall/nat/add chain=srcnat out-interface=ether1 action=masquerade```
+/ip/firewall/nat/add chain=srcnat out-interface=ether1 action=masquerade
+```
 
 Configurar Wifi
 
@@ -104,28 +118,41 @@ Primeiramente você precisa indicar se vai existir senha ou não criando um perf
 
 Para criar um perfil em que não existirá senha no wifi, digite o comando abaixo no terminal.
 
-```/interface/wireless/security-profiles/add name=captive-wifi-password mode=none```
+```
+/interface/wireless/security-profiles/add name=captive-wifi-password mode=none
+```
 
 E caso queira que o wifi possua senha, utilize a linha abaixo, porém altere onde está escrito “senhadowifi” para a senha que preferir.
 
-```/interface/wireless/security-profiles/add name=captive-wifi-password mode=dynamic-keys authentication-types=wpa2-psk wpa2-pre-shared-key=senhadowifi```
+```
+/interface/wireless/security-profiles/add name=captive-wifi-password mode=dynamic-keys authentication-types=wpa2-psk wpa2-pre-shared-key=senhadowifi
+```
+
 Caso você já tenha configurado um perfil de senha utilizando um dos comandos anteriores, para alterar você deve usar comandos diferentes.
 
 Para alterar o perfil para que o wifi fique sem senha:
 
-```/interface/wireless/security-profiles/set [find where name=captive-wifi-password] mode=none```
+```
+/interface/wireless/security-profiles/set [find where name=captive-wifi-password] mode=none
+```
 
 Para alterar o perfil para que o wifi fique com senha (lembre-se de alterar para sua senha de preferência no final do comando onde está escrito “senhadowifi”):
 
-```/interface/wireless/security-profiles/set [find where name=captive-wifi-password] mode=dynamic-keys authentication-types=wpa2-psk wpa2-pre-shared-key=senhadowifi```
+```
+/interface/wireless/security-profiles/set [find where name=captive-wifi-password] mode=dynamic-keys authentication-types=wpa2-psk wpa2-pre-shared-key=senhadowifi
+```
 
 E por fim, configurar a interface wifi, alterando as propriedades para o modo correto e colocando um nome na rede. Altere no final do comando abaixo onde está escrito “Internet-Comunitaria” para o nome que você quer para sua rede wifi:
 
-```/interface/wireless/set wlan1 disabled=no mode=ap-bridge installation=indoor frequency=auto country=brazil-anatel security-profile=captive-wifi-password ssid=Internet-Comunitaria```
+```
+/interface/wireless/set wlan1 disabled=no mode=ap-bridge installation=indoor frequency=auto country=brazil-anatel security-profile=captive-wifi-password ssid=Internet-Comunitaria
+```
 
 Se o seu dispositivo Mikrotik for dual-band (opera tanto na banda de 2.4Ghz quanto na de 5Ghz), você vai ter que configurar a segunda interface wifi, para isso basta trocar “wlan1” no comando anterior para “wlan2”, ficando assim:
 
-```/interface/wireless/set wlan2 disabled=no mode=ap-bridge installation=indoor frequency=auto country=brazil-anatel security-profile=captive-wifi-password ssid=Internet-Comunitaria```
+```
+/interface/wireless/set wlan2 disabled=no mode=ap-bridge installation=indoor frequency=auto country=brazil-anatel security-profile=captive-wifi-password ssid=Internet-Comunitaria
+```
 
 # Configurar melhores parâmetros de banda do wifi
 
