@@ -73,7 +73,7 @@ Agora vamos precisar associar todas as interfaces wifi a essa bridge, para isso 
 
 Após digitar esse comando, você verá no terminal uma lista com as interfaces wifi, conforme exemplo abaixo:
 
-```
+```routeros
 [admin@MikroTik] > /interface/wireless/print proplist=name
 Flags: X - DISABLED; R - RUNNING
  0 X  name="wlan1"
@@ -197,13 +197,69 @@ Após baixar e descompactar, você terá uma pasta contendo os arquivos conforme
 
 Você pode fazer algumas personalizações no portal para se adaptar melhor ao seu cenário. Abrindo o arquivo login.html por exemplo, você pode alterar a linha que diz “Bem vindo a Internet da Praça do Bairro” por algo mais relevante para você, como por exemplo “Bem vindo a Internet do Mercado Santana” ou “Bem vindo a Internet da Barbearia Stylus”. Preste atenção para não alterar o código HTML, altere apenas o texto. Observe algumas linhas do arquivo login.html abaixo. O que aparece em verde é texto que pode ser alterado, e em vermelho é código HTML que precisa ser mantido.
 
+<img width="963" height="140" alt="image" src="https://github.com/user-attachments/assets/020f16df-4db2-4031-9cb3-d19863d17049" />
 
-12 $\color{red}{\text{      <div class='top'>}}$
-13 $\color{red}{\text{        <div class='logo-box'>}}$
-14 $\color{red}{\text{          <img class='logo-img' id='logo' src='' alt='Internet Comunitária'>}}$
-15 $\color{red}{\text{        </div>}}$
-16 $\color{red}{\text{        <div class='text-center'>}}$
-17 $\color{green}{\text{          Bem vindo a Internet da <}}$$\color{red}{\text{span class='text-bold nowrap'>}}$$\color{green}{\text{Praça do Bairro}}$$\color{red}{\text{<span>}}$
-18 $\color{red}{\text{        </div>}}$
-19 $\color{red}{\text{      </div>}}$
+No arquivo alogin.html também existe um pequeno texto que, caso queira, pode ser alterado. Veja abaixo algumas linhas do arquivo onde aparece o texto.
+
+<img width="963" height="76" alt="image" src="https://github.com/user-attachments/assets/ab422132-5101-4be2-99ca-1ff8ed81deb4" />
+
+## Personalizando página de redirecionamento
+
+Você também pode alterar o que será aberto automaticamente após o usuário se conectar no hotspot. Dentro do arquivo alogin.html, o padrão é o usuário ser direcionado para o site do Google. Você pode colocar um site seu, por exemplo https://www.meusite.com.br ou um perfil de rede social. O Instagram possui um protocolo de App que para ser chamado deve ser usado com um link no seguinte formato: instagram://user?username=SEU_PERFIL, e nesse exemplo você só precisa alterar no link onde está escrito “SEU_PERFIL” para o seu nome de perfil no Instagram, sem o “@”. Abra o arquivo alogin.html com o Bloco de notas e verifique no inicio do arquivo uma parte parecida como está abaixo e veja a diferença.
+
+<img width="963" height="139" alt="image" src="https://github.com/user-attachments/assets/5bdd1cdd-667b-46e4-b6c3-0fb269b00c1b" />
+
+## Personalizando imagens de background
+
+O captive portal mostra uma imagem de background aleatória entre as 5 que estão na pasta img. Você pode substituir quaisquer uma dessas imagens, e inclusive deletar as que não quiser. Use sempre o formato JPG e cuide para não colocar uma imagem muito grande para que não demore a ser carregada. Uma boa dica é que sua imagem de background tenha menos de 200kb.
+
+<img width="906" height="393" alt="image" src="https://github.com/user-attachments/assets/7d36d602-175c-456f-aea9-cf4e7cd9e29e" />
+
+Caso você tenha uma imagem de background e queira que somente ela apareça, delete as imagens padrões e coloque a sua na pasta img, renomeando ela para background-1.jpg.
+
+## Personalizando logotipo
+
+No topo do captive portal é apresentado um logotipo que por padrão é o da própria solução “Internet Comunitária”. Para alterá-lo, basta deletar o arquivo logo.png de dentro da pasta img e colocar o seu logotipo no lugar. No caso do logotipo, a imagem pode ser no formato PNG, JPG ou GIF.
+
+Fazer upload dos arquivos do captive portal para o dispositivo Mikrotik
+
+Primeiramente vamos descobrir o endereço de IP do dispositivo Mikrotik, digitando o comando abaixo.
+
+```
+/ip/address/print
+```
+
+No resultado do comando, procure pela linha que corresponde a interface “ether1” na coluna INTERFACE, conforme exemplo abaixo, e observe o valor na coluna ADDRESS.
+
+```routeros
+[admin@MikroTik] > /ip/address/print
+Flags: D - DYNAMIC
+Columns: ADDRESS, NETWORK, INTERFACE, VRF
+#   ADDRESS           NETWORK      INTERFACE  VRF 
+0   172.50.1.1/24     172.50.1.0   wifi       main
+1 D 192.168.1.25/24   192.168.1.0  ether1     main
+```
+
+Nesse exemplo o endereço IP da rede LAN (cabeada) é o 192.168.1.25.
+
+Vamos usar o software FileZilla para enviar os arquivos por FTP para o dispositivo Mikrotik. Ele pode ser baixado através do site oficial pelo link https://filezilla-project.org/.
+
+Depois de instalar o FileZilla, execute-o e na janela inicial, preencha o campo “Host” com o endereço IP e o campo “Nome de usuário” com “admin” e no campo “Senha” a senha que você configurou no seu dispositivo Mikrotik no primeiro acesso. Após preencher os campos clique no botão “Conexão rápida” mais a direita.
+
+<img width="1186" height="221" alt="image" src="https://github.com/user-attachments/assets/98e04f8d-18f3-49c4-a5af-c922b9f25c1e" />
+
+Na parte esquerda da janela do FileZilla você pode navegar pelos arquivos que estão no seu computador, e na parte direita você navega nos arquivos que estão no dispositivo Mikrotik. Você deve procurar a pasta chamada hotspot na parte direita. Dependendo da versão do seu Mikrotik, a pasta hotspot pode já aparecer dentro da pasta “/” (a pasta inicial) ou pode aparecer dentro da pasta flash. Caso você visualize a pasta hotspot, de duplo clique para abri-la, caso veja somente a pasta flash, de um duplo clique nela para abri-la e dentro dela você deve encontrar a pasta hotspot.
+
+Com a pasta hotspot aberta na parte direita da janela, ache a pasta no seu computador onde estão os arquivos do captive portal baixado anteriormente. No nosso caso, baixamos na pasta Downloads do usuário e o caminho dela é: C:\Users\Usuario\Downloads\internet-comunitaria-main
+
+Ao navegar até essa pasta, nos painéis da esquerda você verá os arquivos do captive portal, e todos os arquivos da pasta devem ser enviados para o dispositivo Mikrotik, exceto o LICENSE e o README.md. Para fazer isso, selecione os arquivos clicando em cima do primeiro, segurando a tecla CTRL e clicando nos outros ainda segurando a tecla CTRL. Agora clique com o botão direito do mouse em qualquer um dos arquivos selecionados e clique na opção Upload.
+
+<img width="1186" height="852" alt="image" src="https://github.com/user-attachments/assets/780e02b1-00dd-443e-8a6f-faf6c70cd55e" />
+
+Quando o processo de upload iniciar, alguns arquivos que já existem no dispositivo Mikrotik precisarão ser sobrescritos, e o FileZilla apresentará uma tela de confirmação na qual você precisa pressionar Ok. Você precisará confirmar clicando em Ok algumas vezes pois vários arquivos serão sobrescritos.
+
+<img width="880" height="311" alt="image" src="https://github.com/user-attachments/assets/50f40e90-15a2-486d-9c0f-e07225edd4dc" />
+
+Agora a solução já está configurada e pronta para ser utilizada.
+
 
