@@ -37,7 +37,7 @@ function tryLoadLogo() {
 	}
 	
 	let n = Math.floor(Math.random() * logos.length);
-	let logourl = 'img/' + logos.splice(0, 1)[0];
+	let logourl = 'img/' + logos.splice(n, 1)[0];
 
 	let img = new Image();
 	
