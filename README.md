@@ -197,7 +197,7 @@ Após baixar e descompactar, você terá uma pasta contendo os arquivos conforme
 
 Você pode fazer algumas personalizações no portal para se adaptar melhor ao seu cenário. Abrindo o arquivo login.html por exemplo, você pode alterar a linha que diz “Bem vindo a Internet da Praça do Bairro” por algo mais relevante para você, como por exemplo “Bem vindo a Internet do Mercado Santana” ou “Bem vindo a Internet da Barbearia Stylus”. Preste atenção para não alterar o código HTML, altere apenas o texto. Observe algumas linhas do arquivo login.html abaixo. O que aparece em verde é texto que pode ser alterado, e em vermelho é código HTML que precisa ser mantido.
 
-```
+
 12 $\color{red}{\text{      <div class='top'>}}$
 13 $\color{red}{\text{        <div class='logo-box'>}}$
 14 $\color{red}{\text{          <img class='logo-img' id='logo' src='' alt='Internet Comunitária'>}}$
@@ -206,4 +206,4 @@ Você pode fazer algumas personalizações no portal para se adaptar melhor ao s
 17 $\color{green}{\text{          Bem vindo a Internet da <}}$$\color{red}{\text{span class='text-bold nowrap'>}}$$\color{green}{\text{Praça do Bairro}}$$\color{red}{\text{<span>}}$
 18 $\color{red}{\text{        </div>}}$
 19 $\color{red}{\text{      </div>}}$
-```
+
