@@ -166,18 +166,18 @@ Vai abrir a janela com as interfaces wireless e você vera um item na lista cham
 
 De um duplo clique no item wlan1 da lista para abrir as propriedades da interface. Na janela de propriedades, você vera uma opção chamada “Band”, e clicando no valor que está selecionado atualmente abrirá uma lista com todas as opções disponíveis. Para facilitar sua escolha, siga a ordem de prioridade conforme abaixo, e selecione dentro as opções disponíveis, a que estiver mais acima na lista abaixo:
 
-5Ghz-A/N/AC/AX
-5Ghz-A/N/AC
-5Ghz-A/N
-2Ghz-B/G/N
-2Ghz-B/G
+5Ghz-A/N/AC/AX  
+5Ghz-A/N/AC  
+5Ghz-A/N  
+2Ghz-B/G/N  
+2Ghz-B/G  
 
 Na opção que diz Channel Width, selecione também entre as opções disponíveis a que tiver mais acima na lista hierárquica abaixo:
 
-20/40/80/160Ghz XX
-20/40/80Mhz XX
-20/40Mhz XX
-20Mhz
+20/40/80/160Ghz XX  
+20/40/80Mhz XX  
+20/40Mhz XX  
+20Mhz  
 
 Caso você tenha também a interface wlan2 na lista, faça as duas configurações acima também para a interface wlan2.
 
