@@ -221,7 +221,7 @@ Caso você tenha uma imagem de background e queira que somente ela apareça, del
 
 No topo do captive portal é apresentado um logotipo que por padrão é o da própria solução “Internet Comunitária”. Para alterá-lo, basta deletar o arquivo logo.png de dentro da pasta img e colocar o seu logotipo no lugar. No caso do logotipo, a imagem pode ser no formato PNG, JPG ou GIF.
 
-Fazer upload dos arquivos do captive portal para o dispositivo Mikrotik
+# Fazer upload dos arquivos do captive portal para o dispositivo Mikrotik
 
 Primeiramente vamos descobrir o endereço de IP do dispositivo Mikrotik, digitando o comando abaixo.
 
